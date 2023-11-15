@@ -3,7 +3,7 @@ import game_config as gc
 
 from pygame import display, event, image
 from time import sleep
-from animal import Animal
+from item import Item
 
 def find_index_from_xy(x, y):
     row = y // gc.IMAGE_SIZE
@@ -14,9 +14,9 @@ def find_index_from_xy(x, y):
 pygame.init()
 display.set_caption('My Game')
 screen = display.set_mode((gc.SCREEN_SIZE, gc.SCREEN_SIZE))
-matched = image.load('other_assets/matched.png')
+matched = image.load('CS335-Memory-Game-group-project\other_assets\matched.png')
 running = True
-tiles = [Animal(i) for i in range(0, gc.NUM_TILES_TOTAL)]
+tiles = [Item(i) for i in range(0, gc.NUM_TILES_TOTAL)]
 current_images_displayed = []
 
 while running:
