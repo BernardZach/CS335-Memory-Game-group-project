@@ -2,7 +2,7 @@ import sys
 import os
 import random
 from PyQt5.QtWidgets import QApplication, QLabel, QMainWindow, QVBoxLayout, QWidget, QGridLayout
-from PyQt5.QtGui import QPixmap
+from PyQt5.QtGui import QPixmap, QIcon
 from PyQt5.QtCore import Qt, QTimer
 
 class ImageChangerApp(QMainWindow):
@@ -11,6 +11,11 @@ class ImageChangerApp(QMainWindow):
 
         self.setWindowTitle('CS335 Memory game')
         self.setGeometry(100, 100, 600, 600)
+
+         # Set the window icon
+        icon_path = os.path.join("assets", "code.png")
+        self.setWindowIcon(QIcon(icon_path))
+
 
         self.central_widget = QWidget(self)
         self.setCentralWidget(self.central_widget)
