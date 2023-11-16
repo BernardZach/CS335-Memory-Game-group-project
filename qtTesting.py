@@ -9,7 +9,7 @@ class ImageChangerApp(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.setWindowTitle('Image Changer App')
+        self.setWindowTitle('CS335 Memory game')
         self.setGeometry(100, 100, 600, 600)
 
         self.central_widget = QWidget(self)
@@ -111,6 +111,7 @@ class ImageChangerApp(QMainWindow):
     def show_matched_image(self):
         # Display the "matched.png" image covering the whole screen for 2 seconds
         self.load_image(self.matched_label, "assets/matched.png")
+        self.matched_label.raise_()  # Bring the matched_label to the front
         self.matched_label.show()
         self.matched_timer.start(2000)  # 2000 milliseconds (2 seconds)
 
