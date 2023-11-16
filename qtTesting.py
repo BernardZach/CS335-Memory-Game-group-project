@@ -3,7 +3,7 @@ import os
 import random
 from PyQt5.QtWidgets import QApplication, QLabel, QMainWindow, QVBoxLayout, QWidget, QGridLayout
 from PyQt5.QtGui import QPixmap
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QTimer
 
 class ImageChangerApp(QMainWindow):
     def __init__(self):
@@ -37,6 +37,17 @@ class ImageChangerApp(QMainWindow):
 
         # Create a list to keep track of flipped cards
         self.flipped_cards = []
+
+        # Create a QLabel to cover the whole screen for displaying the "matched.png" image
+        self.matched_label = QLabel(self.central_widget)
+        self.matched_label.setAlignment(Qt.AlignCenter)
+        self.matched_label.setGeometry(self.central_widget.geometry())
+        self.matched_label.hide()
+
+        # Create a timer for showing the matched image
+        self.matched_timer = QTimer(self)
+        self.matched_timer.setSingleShot(True)
+        self.matched_timer.timeout.connect(self.reset_matched_cards)
 
         # Load the initial image for all squares (question-mark.png)
         for row in range(4):
@@ -79,12 +90,36 @@ class ImageChangerApp(QMainWindow):
             # Keep track of the flipped card index
             self.flipped_cards.append(index)
 
+            # Check if two cards are flipped and their images are the same
+            if len(self.flipped_cards) == 2:
+                first_index, second_index = self.flipped_cards
+                first_image = self.card_positions[first_index][1]
+                second_image = self.card_positions[second_index][1]
+
+                if first_image == second_image:
+                    # Display the "matched.png" image covering the whole screen for 2 seconds
+                    self.show_matched_image()
+                    return
+
             # Print the clicked card position and assigned image (Modify this part as needed)
             print(f"Card clicked: Position={position}, Assigned Image={assigned_image}")
 
     def flip_card_back(self, index):
         # Flip back the card at the given index to the initial image
         self.load_image(self.image_labels[index], "assets/question-mark.png")
+
+    def show_matched_image(self):
+        # Display the "matched.png" image covering the whole screen for 2 seconds
+        self.load_image(self.matched_label, "assets/matched.png")
+        self.matched_label.show()
+        self.matched_timer.start(2000)  # 2000 milliseconds (2 seconds)
+
+    def reset_matched_cards(self):
+        # Reset the matched cards back to the initial state
+        for index in self.flipped_cards:
+            self.load_image(self.image_labels[index], "assets/question-mark.png")
+        self.flipped_cards = []
+        self.matched_label.hide()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
