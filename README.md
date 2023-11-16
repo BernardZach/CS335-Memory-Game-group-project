@@ -9,4 +9,4 @@
 
 ## Description
 
-This project is a memory game that challenges players to match pairs of images. It was developed by Zach, William, and Zi as part of their CS335 final group project. The game aims to test and enhance players' memory skills through an engaging and interactive experience.
+This project is a memory game that challenges players to match pairs of images. It was developed by Zach, William, and Shen as part of their CS335 final group project. The game aims to test and enhance players' memory skills through an engaging and interactive experience.
