@@ -3,7 +3,7 @@
 ## Developed by
 - Zach
 - William
-- Zi
+- Shen
 
 ### For CS335 Final Group Project
 
